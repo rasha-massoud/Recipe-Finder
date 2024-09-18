@@ -1,6 +1,6 @@
 # utils/api.py
 import requests
-from configs import API_KEY
+from config import API_KEY
 
 def fetch_recipes_by_ingredients(ingredients, ranking, ignore_pantry):
     url = "https://api.spoonacular.com/recipes/findByIngredients"
