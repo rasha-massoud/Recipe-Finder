@@ -1,14 +1,14 @@
-# Import the requested packages
+"""Import the requested packages"""
 import streamlit as st
 from utils.api import fetch_recipes_by_ingredients, search_recipes_by_name
 
-# Sidebar with options to choose between searching by name or ingredients
 search_option = st.sidebar.selectbox(
     "Search by",
     ["Name", "Ingredients"],
     index=0
 )
 
+WEBSITE = "https://spoonacular.com/recipes"
 if search_option == "Name":
     st.title("Recipe Finder 🍲")
 
@@ -27,7 +27,7 @@ if search_option == "Name":
                         st.write(f"Ready in {recipe.get('readyInMinutes', 'N/A')} minutes")
                         st.write(f"Servings: {recipe.get('servings', 'N/A')}")
                         recipe_title = recipe['title'].replace(' ', '-').lower()
-                        recipe_url = f"https://spoonacular.com/recipes/{recipe_title}-{recipe['id']}"
+                        recipe_url = f"{WEBSITE}/{recipe_title}-{recipe['id']}"
                         st.markdown(f"[View Recipe]({recipe_url})")
                 else:
                     st.write("No recipes found.")
@@ -41,7 +41,6 @@ elif search_option == "Ingredients":
 
     ingredients = st.text_input("Enter ingredients separated by commas", "Apples, Flour, Sugar")
 
-    # Ranking and ignore pantry options
     ranking = st.selectbox(
         "How would you like to rank the recipes?",
         options=["Maximize used ingredients", "Minimize missing ingredients"]
@@ -58,17 +57,14 @@ elif search_option == "Ingredients":
                     st.subheader(recipe['title'])
                     st.image(recipe['image'], use_column_width=True)
 
-                    # Used ingredients
                     USED_INGREDIENTS = ', '.join([ing['name'] for ing in recipe['usedIngredients']])
                     st.write(f"Used ingredients: {USED_INGREDIENTS}")
 
-                    # Missing ingredients
-                    MISSING_INGREDIENTS = ', '.join([ing['name'] for ing in recipe['missedIngredients']])
-                    st.write(f"Missing ingredients: {MISSING_INGREDIENTS}")
+                    MISSING_INGREDIENT = ', '.join([ing['name'] for ing in recipe['missedIngredients']])
+                    st.write(f"Missing ingredients: {MISSING_INGREDIENT}")
 
-                    # Recipe URL
                     recipe_title = recipe['title'].replace(' ', '-').lower()
-                    recipe_url = f"https://spoonacular.com/recipes/{recipe_title}-{recipe['id']}"
+                    recipe_url = f"{WEBSITE}/{recipe_title}-{recipe['id']}"
                     st.markdown(f"[View Recipe]({recipe_url})")
             else:
                 st.write("No recipes found.")
