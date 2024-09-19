@@ -41,7 +41,7 @@ jobs:
             pip3 install -r /home/ubuntu/app/requirements.txt
 
             # Set environment variables
-            echo "API_KEY=${{ secrets.API_KEY }}" > /home/ubuntu/app/config.env
+            echo "API_KEY=${{ secrets.API_KEY }}" > /home/ubuntu/app/config.py
             
             # Stop any running Streamlit processes on port 80
             sudo fuser -k 80/tcp || true

@@ -1,13 +1,14 @@
 """Import the requested packages"""
 import os
 import streamlit as st
-from dotenv import load_dotenv
+from config import API_KEY
+# from dotenv import load_dotenv
 from utils.api import fetch_recipes_by_ingredients, search_recipes_by_name
 
-load_dotenv('/home/ubuntu/app/config.env')
-# load_dotenv('config.env')
+# load_dotenv('/home/ubuntu/app/config.env')
+# # load_dotenv('config.env')
 
-API_KEY = os.getenv('API_KEY')
+# API_KEY = os.getenv('API_KEY')
 
 search_option = st.sidebar.selectbox(
     "Search by",
