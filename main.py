@@ -14,7 +14,7 @@ if search_option == "Name":
 
     st.header("Search by Dish Name")
     dish_name = st.text_input("Enter the dish name:")
-    
+
     if st.button("Search Recipes by Name"):
         if dish_name:
             with st.spinner("Searching recipes..."):
@@ -26,22 +26,26 @@ if search_option == "Name":
                         st.image(recipe.get('image', ''), use_column_width=True)
                         st.write(f"Ready in {recipe.get('readyInMinutes', 'N/A')} minutes")
                         st.write(f"Servings: {recipe.get('servings', 'N/A')}")
-                        st.markdown(f"[View Recipe](https://spoonacular.com/recipes/{recipe['title'].replace(' ', '-').lower()}-{recipe['id']})")
+                        recipe_url = f"https://spoonacular.com/recipes/{recipe['title'].replace(' ', '-').lower()}-{recipe['id']}"
+                        st.markdown(f"[View Recipe]({recipe_url})")
                 else:
                     st.write("No recipes found.")
         else:
             st.warning("Please enter a dish name.")
 
 elif search_option == "Ingredients":
-    
+
     st.title("Recipe Finder 🍲")
     st.header("Search Recipes by Ingredients")
     st.write("Enter ingredients you have, and we'll find recipes for you!")
 
     ingredients = st.text_input("Enter ingredients separated by commas", "Apples, Flour, Sugar")
-    
+
     # Ranking and ignore pantry options
-    ranking = st.selectbox("How would you like to rank the recipes?", options=["Maximize used ingredients", "Minimize missing ingredients"])
+    ranking = st.selectbox(
+        "How would you like to rank the recipes?", 
+        options=["Maximize used ingredients", "Minimize missing ingredients"]
+    )
     ranking_value = 1 if ranking == "Maximize used ingredients" else 2
     ignore_pantry = st.checkbox("Ignore common pantry items (like water, salt, etc.)", value=True)
 
@@ -53,8 +57,10 @@ elif search_option == "Ingredients":
                 for recipe in recipes:
                     st.subheader(recipe['title'])
                     st.image(recipe['image'], use_column_width=True)
-                    st.write(f"Used ingredients: {', '.join([ing['name'] for ing in recipe['usedIngredients']])}")
+                    st.write(f"Used ingredients: 
+                            {', '.join([ing['name'] for ing in recipe['usedIngredients']])}")
                     st.write(f"Missing ingredients: {', '.join([ing['name'] for ing in recipe['missedIngredients']])}")
-                    st.markdown(f"[View Recipe](https://spoonacular.com/recipes/{recipe['title'].replace(' ', '-').lower()}-{recipe['id']})")
+                    recipe_url = f"https://spoonacular.com/recipes/{recipe['title'].replace(' ', '-').lower()}-{recipe['id']}"
+                    st.markdown(f"[View Recipe]({recipe_url})")
             else:
                 st.write("No recipes found.")
