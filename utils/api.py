@@ -1,7 +1,8 @@
 # utils/api.py
 import requests
+from config import API_KEY
 
-def fetch_recipes_by_ingredients(ingredients, ranking, ignore_pantry, API_KEY):
+def fetch_recipes_by_ingredients(ingredients, ranking, ignore_pantry):
     url = "https://api.spoonacular.com/recipes/findByIngredients"
     params = {
         "ingredients": ingredients,
@@ -16,7 +17,7 @@ def fetch_recipes_by_ingredients(ingredients, ranking, ignore_pantry, API_KEY):
     else:
         return []
 
-def search_recipes_by_name(dish_name, API_KEY, number=5):
+def search_recipes_by_name(dish_name, number=5):
     url = "https://api.spoonacular.com/recipes/complexSearch"
     params = {
         "query": dish_name,
