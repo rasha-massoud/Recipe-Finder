@@ -63,8 +63,8 @@ elif search_option == "Ingredients":
                     st.write(f"Used ingredients: {USED_INGREDIENTS}")
 
                     # Missing ingredients
-                    missing_ingredients = ', '.join([ing['name'] for ing in recipe['missedIngredients']])
-                    st.write(f"Missing ingredients: {missing_ingredients}")
+                    MISSING_INGREDIENTS = ', '.join([ing['name'] for ing in recipe['missedIngredients']])
+                    st.write(f"Missing ingredients: {MISSING_INGREDIENTS}")
 
                     # Recipe URL
                     recipe_title = recipe['title'].replace(' ', '-').lower()
