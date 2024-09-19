@@ -1,14 +1,7 @@
 # utils/api.py
 import requests
-import os
-from dotenv import load_dotenv
 
-load_dotenv('/home/ubuntu/app/config.env')
-# load_dotenv('config.env')
-
-API_KEY = os.getenv('API_KEY')
-
-def fetch_recipes_by_ingredients(ingredients, ranking, ignore_pantry):
+def fetch_recipes_by_ingredients(ingredients, ranking, ignore_pantry, API_KEY):
     url = "https://api.spoonacular.com/recipes/findByIngredients"
     params = {
         "ingredients": ingredients,
@@ -23,7 +16,7 @@ def fetch_recipes_by_ingredients(ingredients, ranking, ignore_pantry):
     else:
         return []
 
-def search_recipes_by_name(dish_name, number=5):
+def search_recipes_by_name(dish_name, API_KEY, number=5):
     url = "https://api.spoonacular.com/recipes/complexSearch"
     params = {
         "query": dish_name,
