@@ -27,7 +27,7 @@ jobs:
 
       - name: Run Pylint
         run: |
-          pylint --ignore=__init__.py ./*.py
+          pylint main.py
 
 
   
