@@ -38,7 +38,7 @@ jobs:
             pip3 install -r /home/ubuntu/app/requirements.txt
 
             # Set environment variables
-            echo "API_KEY=${{ secrets.API_KEY }}" > /home/ubuntu/app/config.env
+            echo "API_KEY=${{ secrets.API_KEY }}" > /home/ubuntu/app/config.py
 
             # Run the Streamlit app
             sudo /home/ubuntu/.local/bin/streamlit run main.py --server.port 80 --server.address 0.0.0.0
