@@ -57,8 +57,8 @@ elif search_option == "Ingredients":
                 for recipe in recipes:
                     st.subheader(recipe['title'])
                     st.image(recipe['image'], use_column_width=True)
-                    st.write(f"Used ingredients: 
-                            {', '.join([ing['name'] for ing in recipe['usedIngredients']])}")
+                    used_ingredients = ', '.join([ing['name'] for ing in recipe['usedIngredients']])
+                    st.write(f"Used ingredients: {used_ingredients}")
                     st.write(f"Missing ingredients: {', '.join([ing['name'] for ing in recipe['missedIngredients']])}")
                     recipe_url = f"https://spoonacular.com/recipes/{recipe['title'].replace(' ', '-').lower()}-{recipe['id']}"
                     st.markdown(f"[View Recipe]({recipe_url})")
