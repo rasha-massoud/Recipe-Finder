@@ -41,5 +41,7 @@ jobs:
             echo "API_KEY=${{ secrets.API_KEY }}" > /home/ubuntu/app/config.env
 
             # Run the Streamlit app
-            nohup /home/ubuntu/.local/bin/streamlit run /home/ubuntu/app/main.py --server.port 80 --server.address 0.0.0.0 > /home/ubuntu/app/streamlit.log 2>&1 &
+            sudo /home/ubuntu/.local/bin/streamlit run main.py --server.port 80 --server.address 0.0.0.0
+
+            # nohup /home/ubuntu/.local/bin/streamlit run /home/ubuntu/app/main.py --server.port 80 --server.address 0.0.0.0 > /home/ubuntu/app/streamlit.log 2>&1 &
           EOF
