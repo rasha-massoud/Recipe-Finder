@@ -1,5 +1,5 @@
 """Import the requested packages"""
-import os
+# import os
 import streamlit as st
 from config import API_KEY
 # from dotenv import load_dotenv
