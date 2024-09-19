@@ -35,6 +35,9 @@ jobs:
             sudo apt update && sudo apt upgrade -y
             sudo apt install python3 python3-pip pipx git -y
             pipx install streamlit
+            buntu@ip-172-31-7-134:~$ dotenv --version
+            sudo apt install python3-dotenv-cli
+
             pip3 install -r /home/ubuntu/app/requirements.txt
 
             # Set environment variables
