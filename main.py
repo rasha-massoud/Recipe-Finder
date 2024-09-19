@@ -1,8 +1,8 @@
 """Import the requested packages"""
 import os
 import streamlit as st
-from utils.api import fetch_recipes_by_ingredients, search_recipes_by_name
 from dotenv import load_dotenv
+from utils.api import fetch_recipes_by_ingredients, search_recipes_by_name
 
 load_dotenv('/home/ubuntu/app/config.env')
 # load_dotenv('config.env')
@@ -57,7 +57,8 @@ elif search_option == "Ingredients":
 
     if st.button("Search Recipes"):
         with st.spinner("Fetching recipes..."):
-            recipes = fetch_recipes_by_ingredients(ingredients, RANKING_VALUE, ignore_pantry, API_KEY)
+            recipes = fetch_recipes_by_ingredients(
+                ingredients, RANKING_VALUE, ignore_pantry, API_KEY)
             if recipes:
                 st.write(f"Found {len(recipes)} recipes:")
                 for recipe in recipes:
