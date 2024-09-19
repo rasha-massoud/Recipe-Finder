@@ -3,6 +3,9 @@ import requests
 import os
 from dotenv import load_dotenv
 
+load_dotenv('/home/ubuntu/app/config.env')
+# load_dotenv('config.env')
+
 API_KEY = os.getenv('API_KEY')
 
 def fetch_recipes_by_ingredients(ingredients, ranking, ignore_pantry):
