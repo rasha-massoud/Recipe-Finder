@@ -12,3 +12,38 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Copy files to EC2
+        run: |
+          scp -o StrictHostKeyChecking=no -r ./path/to/your/app ubuntu@15.188.127.118:/home/ubuntu/app
+  
+      - name: Deploy code to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@15.188.127.118 << 'EOF'
+            # Navigate to the app directory (create if it doesn't exist)
+            mkdir -p /home/ubuntu/app
+
+            # Clone the repository or pull the latest changes
+            if [ -d "/home/ubuntu/app/.git" ]; then
+              cd /home/ubuntu/app && git pull
+            else
+              cd /home/ubuntu && git clone https://github.com/rasha-massoud/Recipe-Finder.git app
+            fi
+
+            # Install dependencies
+            sudo apt update && sudo apt upgrade -y
+            sudo apt install python3 python3-pip pipx git -y
+            pipx install streamlit
+            pip3 install -r /home/ubuntu/app/requirements.txt
+
+            # Set environment variables
+            echo "API_KEY=${{ secrets.API_KEY }}" > /home/ubuntu/app/config.env
+
+            # Run the Streamlit app
+            nohup /home/ubuntu/.local/bin/streamlit run /home/ubuntu/app/main.py --server.port 80 --server.address 0.0.0.0 > /home/ubuntu/app/streamlit.log 2>&1 &
+          EOF
