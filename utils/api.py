@@ -1,6 +1,9 @@
 # utils/api.py
 import requests
-from config import API_KEY
+import os
+from dotenv import load_dotenv
+
+API_KEY = os.getenv('API_KEY')
 
 def fetch_recipes_by_ingredients(ingredients, ranking, ignore_pantry):
     url = "https://api.spoonacular.com/recipes/findByIngredients"
