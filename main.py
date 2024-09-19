@@ -1,8 +1,11 @@
+"""Import the requested packages"""
 import streamlit as st
 from utils.api import fetch_recipes_by_ingredients, search_recipes_by_name
 
 
-# Sidebar with options to choose between searching by name or ingredients
+"""
+Sidebar with options to choose between searching by name or ingredients
+"""
 search_option = st.sidebar.selectbox(
     "Search by",
     ["Name", "Ingredients"],
@@ -46,21 +49,24 @@ elif search_option == "Ingredients":
         "How would you like to rank the recipes?", 
         options=["Maximize used ingredients", "Minimize missing ingredients"]
     )
-    ranking_value = 1 if ranking == "Maximize used ingredients" else 2
+    RANKING_VALUE = 1 if ranking == "Maximize used ingredients" else 2
     ignore_pantry = st.checkbox("Ignore common pantry items (like water, salt, etc.)", value=True)
 
     if st.button("Search Recipes"):
         with st.spinner("Fetching recipes..."):
-            recipes = fetch_recipes_by_ingredients(ingredients, ranking_value, ignore_pantry)
+            recipes = fetch_recipes_by_ingredients(ingredients, RANKING_VALUE, ignore_pantry)
             if recipes:
                 st.write(f"Found {len(recipes)} recipes:")
                 for recipe in recipes:
                     st.subheader(recipe['title'])
                     st.image(recipe['image'], use_column_width=True)
-                    used_ingredients = ', '.join([ing['name'] for ing in recipe['usedIngredients']])
-                    st.write(f"Used ingredients: {used_ingredients}")
+
+                    USED_INGREDIENTS = ', '.join([ing['name'] for ing in recipe['usedIngredients']])
+                    st.write(f"Used ingredients: {USED_INGREDIENTS}")
                     st.write(f"Missing ingredients: {', '.join([ing['name'] for ing in recipe['missedIngredients']])}")
-                    recipe_url = f"https://spoonacular.com/recipes/{recipe['title'].replace(' ', '-').lower()}-{recipe['id']}"
+
+                    recipe_title = recipe['title'].replace(' ', '-').lower()
+                    recipe_url = f"https://spoonacular.com/recipes/{recipe_title}-{recipe['id']}"
                     st.markdown(f"[View Recipe]({recipe_url})")
             else:
                 st.write("No recipes found.")
