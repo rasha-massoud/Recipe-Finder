@@ -7,7 +7,7 @@ on:
 
 jobs:
   on-success:
-    if: ${{ !contains(github.event.workflow_run.head_commit.message, '%No Deploy%') }}
+    if: ${{ !contains(github.event.workflow_run.message, 'No Deploy') }}
     runs-on: ubuntu-latest
 
     steps:
@@ -16,7 +16,7 @@ jobs:
 
       - name: Log commit message
         run: |
-          echo "Commit message: ${{ github.event.workflow_run.head_commit.message }}"
+          echo "Commit message: ${{ github.event.workflow_run.message }}"
 
       - name: Set up SSH key
         uses: webfactory/ssh-agent@v0.7.0
