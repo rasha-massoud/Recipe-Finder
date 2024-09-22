@@ -18,7 +18,8 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
   
-      - name: Deploy code to EC2
+      - if: "!contains(github.event.head_commit.message, 'No Deploy')"
+        name: Deploy code to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@15.188.127.118 << 'EOF'
             # Navigate to the app directory (create if it doesn't exist)
