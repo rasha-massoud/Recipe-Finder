@@ -19,6 +19,7 @@ jobs:
           echo "Commit message: ${{ github.event.workflow_run.head_commit.message }}"
 
       - name: Set up SSH key
+        if: ${{ !contains(github.event.workflow_run.head_commit.message, 'No Deploy') }}
         uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
