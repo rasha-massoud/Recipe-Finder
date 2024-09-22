@@ -17,7 +17,7 @@ search_option = st.sidebar.selectbox(
 
 WEBSITE = "https://spoonacular.com/recipes"
 if search_option == "Name":
-    st.title("Recipe Finder 🍲🍲 ")
+    st.title("Recipe Finder 🍲🍲")
 
     st.header("Search by Dish Name")
     dish_name = st.text_input("Enter the dish name:")
@@ -42,7 +42,7 @@ if search_option == "Name":
             st.warning("Please enter a dish name.")
 
 elif search_option == "Ingredients":
-    st.title("Recipe Finder 🍲🍲 ")
+    st.title("Recipe Finder 🍲🍲")
     st.header("Search Recipes by Ingredients")
     st.write("Enter ingredients you have, and we'll find recipes for you!")
 
