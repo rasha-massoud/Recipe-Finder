@@ -7,7 +7,7 @@ on:
 
 jobs:
   on-success:
-    if: ${{ !contains(github.event.workflow_run.message, '%No Deploy%') }}
+    if: ${{ !contains(github.event.workflow_run.message, 'No Deploy') }}
     runs-on: ubuntu-latest
 
     steps:
