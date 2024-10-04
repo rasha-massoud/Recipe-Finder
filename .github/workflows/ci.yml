@@ -40,7 +40,7 @@ jobs:
 
       - name: Build and tag Docker image
         run: |
-          docker build -t docker push mohamadtr/streamlit-app:tagname .
+          docker buildx -t docker push mohamadtr/streamlit-app:tagname .
 
       - name: Push Docker image
         run: |
