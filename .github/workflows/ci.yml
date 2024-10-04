@@ -40,4 +40,4 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push mohamadtr/streamlit-app:tagname .
+          docker push mohamadtr/streamlit-app:tagname
