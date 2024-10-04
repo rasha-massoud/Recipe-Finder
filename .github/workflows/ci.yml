@@ -5,9 +5,8 @@ on:
     branches: ["main"]
 
 jobs:
-  test:
+  build-and-push:
     runs-on: ubuntu-latest
-    name: Executes pylint
 
     steps:
       - name: Checkout
@@ -40,7 +39,7 @@ jobs:
 
       - name: Build and tag Docker image
         run: |
-          docker buildx build -t mohamadtr/streamlit-app:tagname .
+          docker buildx build --tag mohamadtr/streamlit-app:tagname --output=type=docker .
 
       - name: Push Docker image
         run: |
