@@ -34,8 +34,8 @@ if search_option == "Name":
                         st.write(f"Ready in {recipe.get('readyInMinutes', 'N/A')} minutes")
                         st.write(f"Servings: {recipe.get('servings', 'N/A')}")
                         recipe_title = recipe['title'].replace(' ', '-').lower()
-                        recipe_url = f"{WEBSITE}/{recipe_title}-{recipe['id']}"
-                        st.markdown(f"[View Recipe]({recipe_url})")
+                        RECIPE_URL = f"{WEBSITE}/{recipe_title}-{recipe['id']}"
+                        st.markdown(f"[View Recipe]({RECIPE_URL})")
                 else:
                     st.write("No recipes found.")
         else:
@@ -72,7 +72,7 @@ elif search_option == "Ingredients":
                     st.write(f"Missing ingredients: {MISSING_ING}")
 
                     recipe_title = recipe['title'].replace(' ', '-').lower()
-                    recipe_url = f"{WEBSITE}/{recipe_title}-{recipe['id']}"
-                    st.markdown(f"[View Recipe]({recipe_url})")
+                    RECIPE_URL = f"{WEBSITE}/{recipe_title}-{recipe['id']}"
+                    st.markdown(f"[View Recipe]({RECIPE_URL})")
             else:
                 st.write("No recipes found.")
