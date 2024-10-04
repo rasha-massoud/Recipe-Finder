@@ -38,10 +38,6 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASS }}
 
-      - name: Build and tag Docker image
-        run: |
-          docker buildx -t docker push mohamadtr/streamlit-app:tagname .
-
       - name: Push Docker image
         run: |
-          docker push mohamadtr/streamlit-app:tagname
+          docker push mohamadtr/streamlit-app:tagname .
