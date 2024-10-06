@@ -31,6 +31,7 @@ jobs:
       - name: Deploy Docker image to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_INSTANCE_IP }} << 'EOF'
+          sudo yum install docker -y
           docker pull mohamadtr/streamlit-app:tagname
           docker stop $(docker ps -a -q) || true
           docker run -d -p 80:80 mohamadtr/streamlit-app:tagname
