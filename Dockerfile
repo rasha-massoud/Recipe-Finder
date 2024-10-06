@@ -13,7 +13,7 @@ RUN apt-get update -y && apt-get install -y python3-pip git \
     && pip3 install streamlit
 
 # Expose the port on which the Streamlit app runs
-EXPOSE 8501
+EXPOSE 80
 
 # Command to run the Streamlit app
-CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "main.py", "--server.port=80", "--server.address=0.0.0.0"]
