@@ -41,7 +41,7 @@ jobs:
             sudo usermod -aG docker $USER
           fi
 
-          docker pull mohamadtr/streamlit-app:tagname
-          docker stop $(docker ps -a -q) || true
-          docker run -d -p 80:80 mohamadtr/streamlit-app:tagname
+          sudo docker pull mohamadtr/streamlit-app:tagname
+          sudo docker stop $(docker ps -a -q) || true
+          sudo docker run -d -p 80:80 mohamadtr/streamlit-app:tagname
           EOF 
