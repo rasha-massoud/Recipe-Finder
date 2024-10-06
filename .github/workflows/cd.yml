@@ -39,7 +39,7 @@ jobs:
           fi
 
           cat <<EOT > /home/ubuntu/config.py
-          API_KEY = $ {{ secrets.API_KEY }}
+          API_KEY = "${{ secrets.API_KEY }}"
           EOT
 
           # Mount the config.py file into the container
