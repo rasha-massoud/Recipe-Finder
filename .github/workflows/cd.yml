@@ -38,6 +38,15 @@ jobs:
             sudo usermod -aG docker $USER
           fi
 
+          cat <<EOT > /home/ubuntu/config.py
+          API_KEY = $ {{ secrets.API_KEY }}
+          EOT
+
+          # Mount the config.py file into the container
+          sudo docker run -d -p 80:80 -v /home/ubuntu/config.py:/app/config.py mohamadtr/streamlit-app:tagname
+
+          EOF
+
           # Login to DockerHub on EC2
           echo "${{ secrets.DOCKER_TOKEN }}" | sudo docker login -u ${{ secrets.DOCKER_HUB_USER }} --password-stdin
           
@@ -45,8 +54,5 @@ jobs:
 
           # Stop any running containers
           sudo docker stop $(sudo docker ps -a -q) || true
-
-          # Remove stopped containers (optional cleanup)
-          sudo docker rm $(sudo docker ps -a -q) || true
 
           sudo docker run -d -p 80:80 mohamadtr/streamlit-app:tagname
