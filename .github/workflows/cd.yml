@@ -37,9 +37,17 @@ jobs:
             sudo systemctl start docker
             sudo usermod -aG docker $USER
           fi
+          
+          # Stop any container using port 80 to avoid conflicts
+          EXISTING_CONTAINER=$(sudo docker ps -q --filter publish=80)
+          if [ ! -z "$EXISTING_CONTAINER" ]; then
+            echo "Stopping container on port 80..."
+            sudo docker stop $EXISTING_CONTAINER
+          fi
 
-          sudo docker container prune -y
-          sudo docker image prune -a -y
+          # Prune unused containers and images
+          sudo docker container prune -f
+          sudo docker image prune -a -f
 
           cat <<EOT > /home/ubuntu/config.py
           API_KEY = ${{ secrets.API_KEY }}
