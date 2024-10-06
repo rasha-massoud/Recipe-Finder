@@ -38,6 +38,9 @@ jobs:
             sudo usermod -aG docker $USER
           fi
 
+          sudo docker container prune -y
+          sudo docker image prune -a -y
+
           cat <<EOT > /home/ubuntu/config.py
           API_KEY = ${{ secrets.API_KEY }}
           EOT
